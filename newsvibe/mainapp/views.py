@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import article
+from django.shortcuts import get_object_or_404
 def home(request):
-    n=2
+    n=7
     n_range = range(n)
-    return render(request, "home.html",{'n':n_range})
+    articles = article.objects.all()
+    return render(request, "home.html",{'n':articles})
 
 def news(request,pk):
-    return render(request,"news.html")
+    arti = get_object_or_404(article,pk=pk)
+    return render(request,"news.html",{"arti":arti})
 # Create your views here.
