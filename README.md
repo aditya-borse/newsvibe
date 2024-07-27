@@ -1,7 +1,7 @@
 # NewsVibe
 
 ## Barebons UI 
-![NewsVibe UI](/home/aditya/projects/newsvibe/newsvibe_ui.png)
+![NewsVibe UI](/newsvibe_ui.png)
 
 ## Basic plan 
 
