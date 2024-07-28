@@ -118,6 +118,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# api key and account id for cloudflair ai workers
+# api key and account id for cloudflare ai workers
 ACCOUNT_ID = config('ACCOUNT_ID')
 API_TOKEN = config('API_TOKEN')
