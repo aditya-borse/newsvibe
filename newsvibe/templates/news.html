@@ -13,10 +13,10 @@
                 <div class="mx-auto max-w-screen-md px-4 md:px-8">
                   <h1 class="mb-4 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-6">{{arti.title}}</h1>
               
-                  <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">
-                   {{arti.description}} <a href="#" class="text-indigo-500 underline transition duration-100 hover:text-indigo-600 active:text-indigo-700">random</a> or otherwise generated. It may be used to display a sample of fonts or generate text for testing. Filler text is dummy text which has no meaning however looks very similar to real text.
-                  </p>
-              
+                <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">
+                   Sentiment<a href="#" class="text-indigo-500 underline transition duration-100 hover:text-indigo-600 active:text-indigo-700">{{arti.sentiment}}
+                  </p> 
+                  
                   <h2 class="mb-2 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4">Summary</h2>
               
                   <p class="mb-6 text-gray-500 sm:text-lg md:mb-8">{{arti.summary}}</p>
@@ -33,9 +33,9 @@
                     <img src="{{arti.thumbnail_link}}" loading="lazy" alt="Photo by Minh Pham" class="h-full w-full object-cover object-center" />
                   </div>
               
-                  {% comment %} <h2 class="mb-2 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4">Features</h2>
+                  {% comment %} <h2 class="mb-2 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4">Features</h2>{% endcomment %}
               
-                  <p class="text-gray-500 sm:text-lg">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated. It may be used to display a sample of fonts or generate text for testing. Filler text is dummy text which has no meaning however looks very similar to real text.</p> {% endcomment %}
+                  <p class="text-gray-500 sm:text-lg">Link to article:{{arti.link}}</p>
                 </div>
               </div>
         </body>

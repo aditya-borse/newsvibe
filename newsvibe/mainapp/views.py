@@ -30,7 +30,8 @@ def load_news(request):
             description = arti['description'],
             thumbnail_link = arti['thumbnail_link'],
             link = arti['link'],
-            summary = arti['summary']
+            summary = arti['summary'],
+            sentiment = arti['emotion']
             
         )
         ar.save()
@@ -41,9 +42,11 @@ def load_news(request):
             description = arti['description'],
             thumbnail_link = arti['thumbnail_link'],
             link = arti['link'],
-            summary = arti['summary']
+            summary = arti['summary'],
+            sentiment = arti['emotion']
         )
         ar.save()
+        print(arti['emotion'])
     return redirect('home')
 
 def news(request,pk):

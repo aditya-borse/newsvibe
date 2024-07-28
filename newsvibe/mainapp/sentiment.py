@@ -3,6 +3,7 @@ from decouple import config
 
 ACCOUNT_ID = config('ACCOUNT_ID')
 API_KEY = config('API_TOKEN')
+HFAPI_KEY = config('HF_API_TOKEN')
 
 API_BASE_URL = f"https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/run/"
 headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
@@ -24,7 +25,7 @@ def get_sentiment(text):
     
     best_sentiment = max(results, key=lambda x: x['score'])
     sentiment_label = best_sentiment['label']
-    
+   
     return {"sentiment": sentiment_label}
 
 # just an example ->
@@ -68,4 +69,4 @@ Earlier this week, a 26-year-old civil services aspirant was electrocuted after 
 
 
 sentiment = get_sentiment(text)
-print(sentiment)
+# print(sentiment)

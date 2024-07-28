@@ -1,7 +1,17 @@
 import requests
 from bs4 import BeautifulSoup
 from .summarizer import summarize_text
+from .sentiment import get_sentiment
 
+def sentiment_to_emoji(sentiment):
+    if sentiment == "POSITIVE":
+        return "😀"  # Smiling face
+    elif sentiment == "NEUTRAL":
+        return "😐"  # Neutral face
+    elif sentiment == "NEGATIVE":
+        return "😞"  # Sad face
+    else:
+        return "❓"  # Question mark for unknown sentiment
 def scrape_main_page(url):
     articles = []
     response = requests.get(url)
@@ -36,13 +46,19 @@ def scrape_news_hindu(article_url):
     
     content = soup.find('div',class_="articlebodycontent col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12")
     te="fail"
+    emo = "neutral"
     if content == None:
         pass
     else:
         para = content.find_all('p')
         te = ' '.join([p.get_text()  for p in para])
+        emo = get_sentiment(te)
+        
+        emo = sentiment_to_emoji(emo['sentiment'])
+        
         te = summarize_text(te)
         te = te['summary']
+       
     thumbnail = soup.find('source')
     if thumbnail is None:
         thumbnail_link = "https://www.searchenginejournal.com/wp-content/uploads/2024/02/17-65cc9410738f7-sej.png"
@@ -52,6 +68,7 @@ def scrape_news_hindu(article_url):
             'description':description,
             'thumbnail_link':thumbnail_link,
             'summary':te,
+            'emotion':emo,
         }
      
 def scrape_news_nt(article_url):
@@ -64,21 +81,26 @@ def scrape_news_nt(article_url):
         thumbnail = soup.find('img',class_="Image")
         content = soup.find('section',class_="ArticleContent js-article-content")
         te = "fail"
+        emo = "neutral"
         if content:
             para = content.find_all('p')
             te = ' '.join([p.get_text() for p in para])
+            emo = get_sentiment(te)
+            emo = sentiment_to_emoji(emo['sentiment'])
+
             te = summarize_text(te)
             te =te['summary']
             # print(te)
         if thumbnail == None:
              thumbnail_link = "https://www.searchenginejournal.com/wp-content/uploads/2024/02/17-65cc9410738f7-sej.png"
-        else:
+        else: 
             thumbnail_link = thumbnail['src'] 
         return{
             'title':title,
             'description':description,
             'thumbnail_link':thumbnail_link,
             'summary':te,
+            'emotion':emo
         }
 
 
