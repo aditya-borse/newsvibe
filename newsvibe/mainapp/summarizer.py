@@ -1,29 +1,29 @@
-from django.http import JsonResponse
 import requests
 from decouple import config
 
 def summarize_text(text_to_summarize):
     account_id = config('ACCOUNT_ID')
     api_token = config('API_TOKEN')
-    model = '@cf/meta/llama-3-8b-instruct'
+    model = '@cf/facebook/bart-large-cnn'
 
     response = requests.post(
         f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/{model}",
-        headers={"Authorization": f"Bearer {api_token}"},
+        headers={
+            "Authorization": f"Bearer {api_token}",
+            "Content-Type": "application/json"
+        },
         json={
-            "messages": [
-                {"role": "system", "content": "You are a helpful assistant that summarizes news articles."},
-                {"role": "user", "content": f"Please summarize the following news article in 3-4 sentences:\n\n{text_to_summarize}"}
-            ]
+            "input_text": text_to_summarize,
+            "max_length": 150
         }
     )
 
     if response.status_code == 200:
-        summary = response.json().get("result", {}).get("response", "")
-        return summary
+        response_json = response.json()
+        summary = response_json.get("result", {}).get("summary", "")
+        return {"summary": summary}
     else:
-        return "Failed to generate summary."
-
+        return {"error": "Failed to summarize text"}
 
 # just an example -> 
 text = """After seven hours of rescue efforts, the NDRF has ended its search at the coaching centre in Delhi's Old Rajinder Nagar area where three civil services aspirants died last night when the basement of the building was flooded following heavy rains, officials said on Sunday.
