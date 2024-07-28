@@ -29,3 +29,7 @@ sentiment file in mainapp is code where we analyze the sentiment of text that we
 
 # License
 This project is licensed under the MIT License.
+
+# authors 
+ ashish-nagmoti: https://github.com/ashish-nagmoti
+ aditya borse : https://github.com/aditya-borse
