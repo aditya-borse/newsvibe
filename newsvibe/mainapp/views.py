@@ -24,11 +24,14 @@ def load_news(request):
    
     for arti in articles2:
         if arti is None: continue
+        
         ar = article.objects.create(
             title = arti['title'],
             description = arti['description'],
             thumbnail_link = arti['thumbnail_link'],
-            link = arti['link']
+            link = arti['link'],
+            summary = arti['summary']
+            
         )
         ar.save()
     for arti in articles:
@@ -37,7 +40,8 @@ def load_news(request):
             title = arti['title'],
             description = arti['description'],
             thumbnail_link = arti['thumbnail_link'],
-            link = arti['link']
+            link = arti['link'],
+            summary = arti['summary']
         )
         ar.save()
     return redirect('home')

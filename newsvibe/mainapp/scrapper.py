@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from .summarizer import summarize_text
 
 def scrape_main_page(url):
     articles = []
@@ -33,6 +34,15 @@ def scrape_news_hindu(article_url):
     title = soup.find('h1',class_='title').text
     description = soup.find('h2',class_='sub-title').text
     
+    content = soup.find('div',class_="articlebodycontent col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12")
+    te="fail"
+    if content == None:
+        pass
+    else:
+        para = content.find_all('p')
+        te = ' '.join([p.get_text()  for p in para])
+        te = summarize_text(te)
+        te = te['summary']
     thumbnail = soup.find('source')
     if thumbnail is None:
         thumbnail_link = "https://www.searchenginejournal.com/wp-content/uploads/2024/02/17-65cc9410738f7-sej.png"
@@ -41,6 +51,7 @@ def scrape_news_hindu(article_url):
             'title':title,
             'description':description,
             'thumbnail_link':thumbnail_link,
+            'summary':te,
         }
      
 def scrape_news_nt(article_url):
@@ -51,6 +62,14 @@ def scrape_news_nt(article_url):
         description_element = soup.find('p',class_="ArticleHeader__Copy")
         description = description_element.text if description_element else "No description found"
         thumbnail = soup.find('img',class_="Image")
+        content = soup.find('section',class_="ArticleContent js-article-content")
+        te = "fail"
+        if content:
+            para = content.find_all('p')
+            te = ' '.join([p.get_text() for p in para])
+            te = summarize_text(te)
+            te =te['summary']
+            # print(te)
         if thumbnail == None:
              thumbnail_link = "https://www.searchenginejournal.com/wp-content/uploads/2024/02/17-65cc9410738f7-sej.png"
         else:
@@ -59,6 +78,7 @@ def scrape_news_nt(article_url):
             'title':title,
             'description':description,
             'thumbnail_link':thumbnail_link,
+            'summary':te,
         }
 
 
