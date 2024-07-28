@@ -1,38 +1,31 @@
 # NewsVibe
+# Description
+This project is a Django-based web application that fetches and displays articles. The articles are fetched from an external source(the hindu,newsscientist), processed, and stored in a database. Each article has a title, description, thumbnail link, link, summary, and sentiment.
 
-## Barebons UI 
-![NewsVibe UI](/newsvibe_ui.png)
+# Installation
+Clone the repository: git clone https://github.com/aditya-borse/newsvibe.git
 
-## Basic plan 
+Navigate to the project directory: cd newsvibe
 
-1. Create a new Django project and app
+Install the required packages: pip install -r requirements.txt
 
-2. Web scraping
-   - libraries: requests, beautifulsoup4
-   - a scraper function to extract news from target websites
+Run the migrations: python manage.py migrate
 
-3. Sentiment analysis
-   - library: TextBlob
-   - a function to analyze sentiment of news titles
+Start the server: python manage.py runserver
 
-4. Database model
-   - a django model for news articles
-   - fields for title, link, sentiment, and summary
-   - database migrations
+# Usage
+Once the server is running, you can access the application at http://localhost:8000.
 
-5. Django views
-   - a view for the news list page (home page)
-   - a view for the article detail page
-   - scraping and sentiment analysis into views
+# Code Structure
+The main logic of the application is in the views.py file. This file contains a function that fetches the articles, processes them, and stores them in the database. Each article is represented as an instance of the article model.
 
-6. templates
-   - base template
-   - a template for the news list page
-   - a template for the article detail page
+The article model is defined in the models.py file. It has fields for the title, description, thumbnail link, link, summary, and sentiment of an article.
 
-7. URL routing
-   - URL patterns for the news list and article detail pages
+The articles are displayed in the home.html template. This template uses the Django templating language to loop over the articles and display their information.
 
-8. Basic frontend
+scrapper file in mainapp is code that scraps the both website (the hindu and newscietist) and passes the thumbnai link, title, link , text and summary.
 
-9. Deploy
+sentiment file in mainapp is code where we analyze the sentiment of text that we scrapped in scrapper.py
+
+# License
+This project is licensed under the MIT License.

@@ -3,7 +3,7 @@ from decouple import config
 
 ACCOUNT_ID = config('ACCOUNT_ID')
 API_KEY = config('API_TOKEN')
-HFAPI_KEY = config('HF_API_TOKEN')
+
 
 API_BASE_URL = f"https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/run/"
 headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
