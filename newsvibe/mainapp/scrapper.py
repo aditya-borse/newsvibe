@@ -32,10 +32,11 @@ def scrape_news_hindu(article_url):
    
     title = soup.find('h1',class_='title').text
     description = soup.find('h2',class_='sub-title').text
-    thumbnail = soup.find('img',class_='lead-img')
+    
+    thumbnail = soup.find('source')
     if thumbnail is None:
         thumbnail_link = "https://www.searchenginejournal.com/wp-content/uploads/2024/02/17-65cc9410738f7-sej.png"
-    else: thumbnail_link = thumbnail['src'] 
+    else: thumbnail_link = thumbnail['srcset'] 
     return{
             'title':title,
             'description':description,
